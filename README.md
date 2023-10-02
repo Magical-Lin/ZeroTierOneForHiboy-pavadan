@@ -8,7 +8,7 @@ ZeroTier - mipsel
 使用
 ```
 curl -fkSL https://ghproxy.com/https://github.com/Magical-Lin/ZeroTierOneForHiboy-pavadan/releases/download/1.12.2/installzero.sh | sh
-nvram set zerotier_id=9bee8941b5f1b41e
+nvram set zerotier_id=这里填你的网络id
 /etc/storage/zerotier.sh start
 ```
 源帖子https://www.right.com.cn/forum/thread-8274848-1-1.html
