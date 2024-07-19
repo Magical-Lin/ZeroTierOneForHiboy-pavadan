@@ -5,7 +5,7 @@ PROG=/opt/bin/zerotier-one
 PROGCLI=/opt/bin/zerotier-cli
 PROGIDT=/opt/bin/zerotier-idtool
 config_path="/etc/storage/zerotier-one"
-PLANET="/etc/storage/zerotier-one/planet"
+PLANET="/etc/storage/planet"
 zeroid="$(nvram get zerotier_id)"
 zerotier_renum=`nvram get zerotier_renum`
 zerotier_renum=${zerotier_renum:-"0"}
@@ -168,27 +168,27 @@ if [ ! -s "$SVC_PATH" ] ; then
        rm -rf /etc/storage/zerotier-one/MD5.txt
        if [ ! -z "$tag" ] ; then
            logger -t "【ZeroTier】" "获取到最新版本zerotier_v$tag,开始下载"
-           wgetcurl.sh "/etc/storage/zerotier-one/MD5.txt" "https://github.com/lmq8267/ZeroTierOne/releases/download/$tag/MD5.txt" "https://fastly.jsdelivr.net/gh/lmq8267/zerotier@master/install/$tag/tarMD5.txt"
+           wgetcurl.sh "/etc/storage/zerotier-one/MD5.txt" "https://github.com/lmq8267/ZeroTierOne/releases/download/$tag/tarMD5.txt" "https://hub.gitmirror.com/https://github.com/lmq8267/ZeroTierOne/releases/download/$tag/tarMD5.txt"
            if [ "$zerosize" -lt 2 ];then
                logger -t "【ZeroTier】" "您的设备/etc/storage空间剩余"$zerosize"M，不足2M，将下载安装包到内存安装"
                [ "$zerosize" -gt 1 ] && logger -t "【ZeroTier】" "可尝试手动上传zerotier.tar.gz和MD5.txt到内部存储/etc/storage/zerotier-one/目录里"
-               wgetcurl.sh "$SVC_PATH2" "https://github.com/lmq8267/ZeroTierOne/releases/download/$tag/zerotier.tar.gz" "https://fastly.jsdelivr.net/gh/lmq8267/zerotier@master/install/$tag/zerotier.tar.gz"
+               wgetcurl.sh "$SVC_PATH2" "https://github.com/lmq8267/ZeroTierOne/releases/download/$tag/zerotier.tar.gz" "https://hub.gitmirror.com/https://github.com/lmq8267/ZeroTierOne/releases/download/$tag/zerotier.tar.gz"
                else
                 logger -t "【ZeroTier】" "您的设备/etc/storage空间充足:"$zerosize"M，将下载安装包到内部存储"
-                wgetcurl.sh "/etc/storage/zerotier-one/zerotier.tar.gz" "https://github.com/lmq8267/ZeroTierOne/releases/download/$tag/zerotier.tar.gz" "https://fastly.jsdelivr.net/gh/lmq8267/zerotier@master/install/$tag/zerotier.tar.gz"
+                wgetcurl.sh "/etc/storage/zerotier-one/zerotier.tar.gz" "https://github.com/lmq8267/ZeroTierOne/releases/download/$tag/zerotier.tar.gz" "https://hub.gitmirror.com/https://github.com/lmq8267/ZeroTierOne/releases/download/$tag/zerotier.tar.gz"
            fi
        else
               logger -t "【ZeroTier】" "最新版本获取失败，开始下载备用程序zerotier_v1.10.6"
               logger -t "【ZeroTier】" "若出现反复更新又下载，请关闭自动更新"
 	      rm -rf /etc/storage/zerotier-one/MD5.txt
-              wgetcurl.sh "/etc/storage/zerotier-one/MD5.txt" "https://github.com/lmq8267/ZeroTierOne/releases/download/1.10.6/MD5.txt" "https://fastly.jsdelivr.net/gh/lmq8267/zerotier@master/install/1.10.6/tarMD5.txt"
+              wgetcurl.sh "/etc/storage/zerotier-one/MD5.txt" "https://github.com/lmq8267/ZeroTierOne/releases/download/1.10.6/tarMD5.txt" "https://hub.gitmirror.com/https://github.com/lmq8267/ZeroTierOne/releases/download/1.10.6/tarMD5.txt"
               if [ "$zerosize" -lt 2 ];then
                logger -t "【ZeroTier】" "您的设备/etc/storage空间剩余"$zerosize"M，不足2M，将下载安装包到内存安装"
                [ "$zerosize" -gt 1 ] && logger -t "【ZeroTier】" "可尝试手动上传zerotier.tar.gz和MD5.txt到内部存储/etc/storage/zerotier-one/目录里"
-               wgetcurl.sh "$SVC_PATH2" "https://github.com/lmq8267/ZeroTierOne/releases/download/1.10.6/zerotier.tar.gz" "https://fastly.jsdelivr.net/gh/lmq8267/zerotier@master/install/1.10.6/zerotier.tar.gz"
+               wgetcurl.sh "$SVC_PATH2" "https://github.com/lmq8267/ZeroTierOne/releases/download/1.10.6/zerotier.tar.gz" "https://hub.gitmirror.com/https://github.com/lmq8267/ZeroTierOne/releases/download/1.10.6/zerotier.tar.gz"
                else
                 logger -t "【ZeroTier】" "您的设备/etc/storage空间充足:"$zerosize"M，将下载安装包到内部存储"
-                wgetcurl.sh "/etc/storage/zerotier-one/zerotier.tar.gz" "https://github.com/lmq8267/ZeroTierOne/releases/download/1.10.6/zerotier.tar.gz" "https://fastly.jsdelivr.net/gh/lmq8267/zerotier@master/install/1.10.6/zerotier.tar.gz"
+                wgetcurl.sh "/etc/storage/zerotier-one/zerotier.tar.gz" "https://github.com/lmq8267/ZeroTierOne/releases/download/1.10.6/zerotier.tar.gz" "https://hub.gitmirror.com/https://github.com/lmq8267/ZeroTierOne/releases/download/1.10.6/zerotier.tar.gz"
               fi
         fi
         [ ! -s "$SVC_PATH2" ] && [ -s "/etc/storage/zerotier-one/zerotier.tar.gz" ] && cp -rf /etc/storage/zerotier-one/zerotier.tar.gz "$SVC_PATH2"
@@ -214,8 +214,8 @@ if [ ! -s "$SVC_PATH" ] ; then
      fi
 fi
 chmod 777 "$PROG"
-[ -f "$PROGCLI" ] && ln -sf "$PROG" "$PROGCLI"
-[ -f "$PROGIDT" ] && ln -sf "$PROG" "$PROGIDT"
+[ ! -f "$PROGCLI" ] && ln -sf "$PROG" "$PROGCLI"
+[ ! -f "$PROGIDT" ] && ln -sf "$PROG" "$PROGIDT"
 chmod 777 "$PROGIDT"
 chmod 777 "$PROGCLI"
  if [ -s "$SVC_PATH" ] && [ -f "$PROGCLI" ] && [ -f "$PROGIDT" ] ; then
@@ -250,7 +250,7 @@ cfg="$(nvram get zerotier_id)"
 echo $cfg
 port=""
 args=""
-secret="$(cat /etc/storage/zerotier-one/identity.secret)"
+[ -f /etc/storage/zerotier-one/identity.secret ] && secret="$(cat /etc/storage/zerotier-one/identity.secret)"
 moonid="$(nvram get zerotier_moonid)"
 planet="$(nvram get zerotier_planet)"
 [ ! -s "/etc/storage/zerotier-one/identity.secret" ] && secret="$(nvram get zerotier_secret)"
@@ -284,11 +284,7 @@ if [ -n "$planet"]; then
 fi
 if [ -f "$PLANET" ]; then
 		if [ ! -s "$PLANET" ]; then
-			echo "自定义planet文件为空,删除..."
-			rm -f $config_path/planet
-			rm -f $PLANET
-			nvram set zerotier_planet=""
-			nvram commit
+			echo "自定义planet文件为空"
 		else
 			logger -t "【ZeroTier】" "找到自定义planet文件,开始创建..."
 			planet="$(base64 $PLANET)"
@@ -298,13 +294,20 @@ if [ -f "$PLANET" ]; then
 			nvram commit
 		fi
 fi
-add_join $(nvram get zerotier_id)
+
 $PROG $args $config_path >/dev/null 2>&1 &
-rules
+while [ ! -f $config_path/zerotier-one.port ]; do
+		sleep 1
+done
 
 if [ -n "$moonid" ]; then
    $PROGCLI -D$config_path orbit $moonid $moonid
    logger -t "【ZeroTier】" "orbit moonid $moonid ok!"
+fi
+if [ -n "$cfg" ]; then
+  $PROGCLI join $cfg
+  #logger -t "【ZeroTier】" "join zerotier_id $zeroid ok!"
+  rules
 fi
 zeromoonip="$(nvram get zeromoonwan)"
 moonip="$(nvram get zerotiermoon_ip)"
@@ -320,10 +323,6 @@ zero_ping &
 exit 0
 }
 
-add_join() {
-		touch $config_path/networks.d/$(nvram get zerotier_id).conf
-}
-
 rules() {
 	while [ "$(ifconfig | grep zt | awk '{print $1}')" = "" ]; do
 		sleep 1
@@ -335,6 +334,25 @@ rules() {
         [ -n "$ip66" ] && logger -t "【ZeroTier】" ""$zt0"_ipv6:$ip66"
         [ -n "$ip44" ] && logger -t "【ZeroTier】" ""$zt0"_ipv4:$ip44"
         [ -z "$ip44" ] && logger -t "【ZeroTier】" "未获取到zerotier ip请前往官网检查是否勾选此路由加入网络并分配IP"
+	count=0
+        while [ $count -lt 5 ]
+        do
+       ztstatus=$(zerotier-cli info | awk '{print $5}')
+       if [ "$ztstatus" = "OFFLINE" ]; then
+        sleep 3
+        elif [ "$ztstatus" = "ONLINE" ]; then
+        ztid=$(zerotier-cli info | awk '{print $3}')
+        logger -t "【ZeroTier】" "若是官网没有此设备，请手动绑定此设备ID  $ztid "
+	echo "若是官网没有此设备，请手动绑定此设备Node Id  $ztid "
+        break
+        fi
+        count=$(expr $count + 1)
+        done
+	if [ "$(zerotier-cli info | awk '{print $5}')" = "OFFLINE" ] ; then
+          echo "你的网络无法连接到zerotier服务器，请检查网络，程序退出"
+	  logger -t "【ZeroTier】" "你的网络无法连接到zerotier服务器，请检查网络，程序退出"
+          exit 1
+        fi
 	del_rules
 	iptables -I INPUT -i $zt0 -j ACCEPT
 	iptables -I FORWARD -i $zt0 -o $zt0 -j ACCEPT
